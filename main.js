@@ -5,11 +5,18 @@ const printToDom = (divId, textToPrint) => {
     selectedDiv.innerHTML = textToPrint
 }
 
-const addMiddlePassenger = (struggleBus, passenger) => {
-    let newArray = []
-    let middle = struggleBus.length/2;
-    newArray.push(struggleBus.splice(middle,0, passenger));
-};
+// const addMiddlePassenger = (struggleBus, passenger) => {
+//     let newArray = []
+//     let middle = struggleBus.length/2;
+//     newArray.push(struggleBus.splice(middle, 0, passenger));
+// };
+
+const addMiddle = (struggleBus, passenger) => {
+    // created a variable that represented the middle and how to get there ( divide the array by 2 so we know to place the passenger in the middle)
+    var middle = struggleBus.length/2;
+    // then the array.splice ( then the first element is the index, 0 means you are not removing any exisiting elemenets, and then passenger is who you are adding)
+    struggleBus.splice( middle, 0 , passenger);
+}
 
 const addPassenger = (name, wallet, isStruggling, seat) => {
 // make a passenger object
@@ -31,7 +38,7 @@ const addPassenger = (name, wallet, isStruggling, seat) => {
           struggleBus.unshift(passenger);
       }
       else if ( seat === 'middle') {
-        addMiddlePassenger(struggleBus, passenger);
+        addMiddle(struggleBus, passenger);
       }
 
 };
@@ -76,7 +83,6 @@ printToDom('the-bus', domString);
 }
 
 const init = () => {
-    addPassenger('Sarah', 25, true, 'middle');
     addPassenger('Mary', 3, true, 'front');
     addPassenger('Zoe', 20, false, 'back');
     addPassenger('Greg', 4, false, 'back');
@@ -84,10 +90,11 @@ const init = () => {
     addPassenger('Matt1', 5, true, 'front');
     addPassenger('Matt2', 15, true, 'front');
     addPassenger('Matt3', 3, true, 'front');
+    addPassenger('Sarah', 25, false, 'middle');
     // console.log(unloadPassenger(struggleBus, 'front'));
     // console.log(unloadPassenger(struggleBus, 'middle'));
     // need to store the function in varible so we can actually use the variable when we print to the dom
-    busBuilder(struggleBus);
+    busBuilder(allAboard(struggleBus));
     console.log(struggleBus);
 
 }
